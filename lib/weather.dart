@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import './utils.dart';
 
 class Weather extends StatefulWidget {
   @override
@@ -63,6 +64,14 @@ class _WeatherState extends State<Weather> {
                 'assets/sun.png',
                 height: 100,
                 width: 100,
+              ),
+            ),
+            Container(
+              // alignment: Alignment.center,
+              margin: const EdgeInsets.fromLTRB(30, 300, 0, 0),
+              child: Text(
+                'data',
+                style: tempStyle(),
               ),
             )
           ],
