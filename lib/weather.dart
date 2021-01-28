@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import './utils.dart';
+import './utils.dart' as util;
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class Weather extends StatefulWidget {
   @override
@@ -79,6 +82,13 @@ class _WeatherState extends State<Weather> {
       ),
     );
   }
+
+  Future<Map> getweather(String appId, String city) async {
+    String apiUrl =
+        'api.openweathermap.org/data/2.5/weather?q=$city&appid=${util.appId}&units=metric';
+    http.Response response = await http.get(apiUrl);
+    return json.decode(response.body);
+  }
 }
 
 TextStyle tempStyle() {
@@ -89,3 +99,4 @@ TextStyle tempStyle() {
     fontSize: 32,
   );
 }
+// api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}& units=metric
