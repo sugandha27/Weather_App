@@ -22,41 +22,61 @@ class _WeatherState extends State<Weather> {
               color: HexColor('#F6F7F3'),
               fontWeight: FontWeight.w700,
             ),
+            textAlign: TextAlign.left,
           ),
+          centerTitle: false,
           // backgroundColor: HexColor('#A5B9B9'),
           backgroundColor: HexColor('#393B63'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () => {},
+            ),
+          ],
         ),
-        body: Container(
-          // color: HexColor('#CABCB0'),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: RaisedButton(
-                  elevation: 5.0,
-                  onPressed: () => {},
-                  color: HexColor('#0F0D35'),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Search',
-                      style: TextStyle(
-                        color: HexColor('#F6F7F3'),
-                        fontSize: 24,
-                        // color: HexColor('#0F0D35'),
-                      ),
-                    ),
-                  ),
+        body: Stack(
+          children: [
+            Center(
+              child: Image.asset(
+                'assets/sunny.jpg',
+                height: 900,
+                width: 490,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+              child: Text(
+                'Spain',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  fontStyle: FontStyle.italic,
+                  color: HexColor('#F6F7F3'),
                 ),
               ),
-            ],
-          ),
+              alignment: Alignment.topRight,
+              margin: EdgeInsets.fromLTRB(0, 20, 25, 0),
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/sun.png',
+                height: 100,
+                width: 100,
+              ),
+            )
+          ],
         ),
       ),
     );
   }
+}
+
+TextStyle tempStyle() {
+  return TextStyle(
+    color: HexColor('#F6F7F3'),
+    fontStyle: FontStyle.italic,
+    fontWeight: FontWeight.w500,
+    fontSize: 32,
+  );
 }
