@@ -11,6 +11,11 @@ class Weather extends StatefulWidget {
 }
 
 class _WeatherState extends State<Weather> {
+  void show() async {
+    Map data = await getweather(util.appId, util.defaultCity);
+    print(data.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,7 +39,7 @@ class _WeatherState extends State<Weather> {
           actions: [
             IconButton(
               icon: Icon(Icons.menu),
-              onPressed: () => {},
+              onPressed: show,
             ),
           ],
         ),
@@ -72,10 +77,7 @@ class _WeatherState extends State<Weather> {
             Container(
               // alignment: Alignment.center,
               margin: const EdgeInsets.fromLTRB(30, 300, 0, 0),
-              child: Text(
-                'data',
-                style: tempStyle(),
-              ),
+              child: updateTempWidget(util.defaultCity),
             )
           ],
         ),
@@ -85,9 +87,15 @@ class _WeatherState extends State<Weather> {
 
   Future<Map> getweather(String appId, String city) async {
     String apiUrl =
-        'api.openweathermap.org/data/2.5/weather?q=$city&appid=${util.appId}&units=metric';
+        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=${util.appId}&units=metric';
     http.Response response = await http.get(apiUrl);
     return json.decode(response.body);
+  }
+
+  Widget updateTempWidget(String city) {
+    return FutureBuilder(
+        future: getweather(util.appId, city),
+        builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {});
   }
 }
 
