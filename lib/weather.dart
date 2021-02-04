@@ -4,6 +4,7 @@ import './utils.dart' as util;
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import './changeCity.dart';
 
 class Weather extends StatefulWidget {
   @override
@@ -14,6 +15,14 @@ class _WeatherState extends State<Weather> {
   void show() async {
     Map data = await getweather(util.appId, util.defaultCity);
     print(data.toString());
+  }
+
+  Future<dynamic> _searchCity(BuildContext context) async {
+    Map results = await Navigator.of(context).push(
+      new MaterialPageRoute(builder: (BuildContext context) {
+        return new ChangeCity();
+      }),
+    );
   }
 
   @override
@@ -38,8 +47,10 @@ class _WeatherState extends State<Weather> {
           backgroundColor: HexColor('#393B63'),
           actions: [
             IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: show,
+              icon: Icon(Icons.search),
+              onPressed: () {
+                _searchCity(context);
+              },
             ),
           ],
         ),
