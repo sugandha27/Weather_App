@@ -57,14 +57,15 @@ class _WeatherState extends State<Weather> {
               child: Text(
                 'Spain',
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 28,
                   fontWeight: FontWeight.w500,
                   fontStyle: FontStyle.italic,
-                  color: HexColor('#F6F7F3'),
+                  // color: HexColor('#F6F7F3'),
+                  backgroundColor: HexColor('#F4BB8A'),
                 ),
               ),
               alignment: Alignment.topRight,
-              margin: EdgeInsets.fromLTRB(0, 20, 25, 0),
+              margin: EdgeInsets.fromLTRB(0, 30, 20, 0),
             ),
             Container(
               alignment: Alignment.center,
@@ -95,7 +96,47 @@ class _WeatherState extends State<Weather> {
   Widget updateTempWidget(String city) {
     return FutureBuilder(
         future: getweather(util.appId, city),
-        builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {});
+        builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+          if (snapshot.hasData) {
+            Map content = snapshot.data;
+            return Container(
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      content['main']['temp'].toString(),
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      content['main']['temp'].toString(),
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      content['main']['temp'].toString(),
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else
+            return Container(
+              child: Text('Enter the correct city name.'),
+            );
+        });
   }
 }
 
